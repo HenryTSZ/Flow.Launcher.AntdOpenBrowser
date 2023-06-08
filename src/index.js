@@ -9,12 +9,24 @@ import { camelToKebab, findVal } from './utils.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
+// 配置参数
+const configParams = ['version', 'language']
+
 const { on, showResult, run } = new Flow('app.png')
 
 on('query', params => {
   params = params.filter(Boolean)
   if (params) {
-    showResult(...getResults(params[0]))
+    const [first = ''] = params
+
+    if (configParams.includes(first.toLowerCase())) {
+      const map = { versionMap, languageMap }
+      const currentMap = map[`${first}Map`]
+      showResult(...getConfigResult(currentMap, first, config[first]))
+      return
+    }
+
+    showResult(...getResults(first))
     return
   }
   showResult({
@@ -30,13 +42,24 @@ function getResults(data = '') {
   )
   const baseUrl = findVal(versionMap, config.version)
   const language = findVal(languageMap, config.language)
-  return result.map(({ title, subtitle, name }) => {
+  return result.map(({ title, subtitle, name }) => ({
+    title,
+    subtitle,
+    iconPath: `${join(__dirname, 'assets', 'icon', name)}.png`,
+    method: 'open',
+    params: [`${baseUrl}${camelToKebab(name)}${language}`]
+  }))
+}
+
+function getConfigResult(currentMap, key, val) {
+  return currentMap.map(({ title, label }) => {
+    const isCurrent = val === label
     return {
       title,
-      subtitle,
-      iconPath: `${join(__dirname, 'assets', 'images', name)}.png`,
-      method: 'open',
-      params: [`${baseUrl}${camelToKebab(name)}${language}`]
+      subtitle: isCurrent ? `${key} 的配置信息如上` : `点击修改 ${key} 为 ${title}`,
+      score: isCurrent ? 100 : 0,
+      method: 'modify',
+      params: [key, label]
     }
   })
 }

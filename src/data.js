@@ -429,18 +429,22 @@ export const components = [
 
 export const versionMap = [
   {
+    title: '5.x',
     value: 'https://ant.design/components/',
     label: '5'
   },
   {
+    title: '4.x',
     value: 'https://4x.ant.design/components/',
     label: '4'
   },
   {
+    title: '3.x',
     value: 'https://3x.ant.design/components/',
     label: '3'
   },
   {
+    title: '2.x',
     value: 'https://2x.ant.design/components/',
     label: '2'
   }
