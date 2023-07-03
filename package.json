@@ -1,6 +1,6 @@
 {
   "name": "antd-open-browser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Quickly open the antd component",
   "type": "module",
   "main": "index.js",

@@ -46,9 +46,9 @@ pm install AntdOpenBrowser
 
 - [x] Add Set the version of antd
 - [x] Add Set the language of antd
-- [ ] Add Set the base url of antd
+- [x] The list only displays the Chinese and English names of the components, not the categories of the components
 - [ ] Integrate configuration items. Unified use of `set` configuration, such as: `at set version`, `at set language`...
+- [ ] Add Set the base url of antd
 - [ ] Automatically filter component libraries based on version. Prevent opening non-existent components in low versions
 - [ ] Fix the bug that advanced components cannot be opened
-- [ ] The list only displays the Chinese and English names of the components, not the categories of the components
 - [ ] Internationalization configuration. According to the set language, display the corresponding prompt information
